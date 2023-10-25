@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-webapi
+  labels:
+    app: webapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapi
+  template:
+    metadata:
+      labels:
+        app: webapi
+    spec:
+      containers:
+        - name: webapi
+          image: 000341004250.dkr.ecr.eu-west-2.amazonaws.com/node-webapi:1.4
+          imagePullPolicy: Always
+          ports:
+            - name: web
+              containerPort: 3000
+          env:
+            - name: ALTAS_CLUSTER_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: atlas-config
+                  key: atlas-cluster-id
+            - name: ATLAS_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: atlas-config
+                  key: atlas-user
+            - name: ATLAS_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: atlas-config
+                  key: atlas-passwprd
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rqm-express-service
+spec:
+  selector:
+    app: express-webapi
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 30002

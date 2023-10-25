@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: atlas-config
+data:
+  atlas-cluster-id: cluster0.rt2saq3
+  atlas-user: gnutz
+  atlas-password: kaansdpe

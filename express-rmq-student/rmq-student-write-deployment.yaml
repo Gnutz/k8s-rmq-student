@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rmq-writer
+  labels:
+    app: rmq-writer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rmq-writer
+  template:
+    metadata:
+      labels:
+        app: rmq-writer
+    spec:
+      containers:
+        - name: rmq-writer
+          image: 000341004250.dkr.ecr.eu-west-2.amazonaws.com/rmq-students-write:1.1
+          ports:
+            - containerPort: 3000

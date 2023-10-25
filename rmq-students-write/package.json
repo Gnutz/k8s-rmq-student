@@ -1,0 +1,14 @@
+{
+  "name": "rmq-students-write",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "dotenv": "^16.0.3",
+    "mongodb": "^4.12.1",
+    "mongoose": "^6.7.3"
+  }
+}
